@@ -1,6 +1,5 @@
 package com.bng.ecommerce.user.model;
 
-import jakarta.persistence.Embeddable;
 import lombok.Data;
 
 /**
@@ -9,7 +8,6 @@ import lombok.Data;
  * Date: 05/03/26
  ***/
 @Data
-@Embeddable
 public class Address {
     private String street;
     private String city;
