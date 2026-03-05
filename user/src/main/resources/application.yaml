@@ -4,13 +4,9 @@ server:
 spring:
   application:
     name: user-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/user_db
-    username: postgres
-    password: postgres
-  jpa:
-    database: POSTGRESQL
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mongodb:
+#    uri: mongodb+srv://
+#    database: userdb
+    host: localhost # This is the value I expect to be overridden
+    port: 27017
+    database: userdb

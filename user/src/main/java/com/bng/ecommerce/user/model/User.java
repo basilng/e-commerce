@@ -1,16 +1,14 @@
 package com.bng.ecommerce.user.model;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
+
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
-import java.util.UUID;
 
 /**
  * Project: IntelliJ IDEA
@@ -18,18 +16,18 @@ import java.util.UUID;
  * Date: 05/03/26
  ***/
 @Data
-@Entity(name = "users")
-@EntityListeners(AuditingEntityListener.class)
+@Document(collection = "users")
 public class User {
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String id;
     private String firstName;
     private String lastName;
 
+    @Indexed(unique = true)
     private String email;
     private String phone;
     private UserRole role = UserRole.CUSTOMER;
-    @Embedded
+
     private Address address;
 
     @CreatedDate
