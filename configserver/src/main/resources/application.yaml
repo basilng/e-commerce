@@ -1,0 +1,27 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///Users/bng-mac/Projects/learning2026/ecommerce/config
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "busrefresh"
+
+encrypt:
+  key: "88812ac778c345da7be6dc7df13bc58b111079b0555861bda3f499002fed32a2"
