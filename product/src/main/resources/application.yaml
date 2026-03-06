@@ -1,19 +1,5 @@
-#server:
-#  port: 8081
-
 spring:
   application:
     name: product-service
-
   config:
-    import: optional:configserver:http://localhost:8888
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/product_db
-#    username: postgres
-#    password: postgres
-#  jpa:
-#    database: POSTGRESQL
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    import: optional:configserver:${CONFIG_URI}
