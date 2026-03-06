@@ -10,12 +10,12 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///Users/bng-mac/Projects/learning2026/ecommerce/config
+          search-locations: ${NATIVE_PATH}
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: user
-    password: password
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USER}
+    password: ${RABBIT_PASSWORD}
 
 management:
   endpoints:
@@ -24,4 +24,4 @@ management:
         include: "busrefresh"
 
 encrypt:
-  key: "88812ac778c345da7be6dc7df13bc58b111079b0555861bda3f499002fed32a2"
+  key: ${AES_KEY}

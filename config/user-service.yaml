@@ -7,15 +7,15 @@ spring:
   mongodb:
 #    uri: mongodb+srv://
 #    database: userdb
-    host: localhost # This is the value I expect to be overridden
-    port: 27017
-    database: userdb
+    host: ${MONGO_HOST} # This is the value I expect to be overridden
+    port: ${MONGO_PORT}
+    database: ${MONGO_DATABASE}
 
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: user
-    password: password
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USER}
+    password: ${RABBIT_PASSWORD}
 
 management:
   endpoints:
