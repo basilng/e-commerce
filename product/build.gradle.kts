@@ -31,6 +31,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")

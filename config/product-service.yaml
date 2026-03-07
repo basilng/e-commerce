@@ -28,3 +28,10 @@ management:
     web:
       exposure:
         include: "busrefresh"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI}
+    register-with-eureka: true
+    fetch-registry: true
