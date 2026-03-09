@@ -30,6 +30,7 @@ dependencies {
 	implementation("io.micrometer:micrometer-tracing-bridge-brave")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
+	runtimeOnly("io.netty:netty-resolver-dns-native-macos:osx-aarch_64")
 	testImplementation("org.springframework.boot:spring-boot-micrometer-tracing-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-zipkin-test")
 	testImplementation("io.projectreactor:reactor-test")
