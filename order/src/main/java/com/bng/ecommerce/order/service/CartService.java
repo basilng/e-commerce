@@ -1,5 +1,9 @@
 package com.bng.ecommerce.order.service;
 
+import com.bng.ecommerce.order.client.ProductHttpInterface;
+import com.bng.ecommerce.order.client.UserHttpInterface;
+import com.bng.ecommerce.order.client.dto.ProductResponse;
+import com.bng.ecommerce.order.client.dto.UserResponse;
 import com.bng.ecommerce.order.controller.dto.CartItemRequest;
 import com.bng.ecommerce.order.model.CartItem;
 import com.bng.ecommerce.order.repository.CartItemRepository;
@@ -15,6 +19,9 @@ import java.util.List;
 @Transactional
 public class CartService {
     private final CartItemRepository cartItemRepository;
+    //    private final ProductRestClient restClient;
+    private final ProductHttpInterface productHttpInterface;
+    private final UserHttpInterface userHttpInterface;
     int attempt = 0;
 
 
@@ -22,7 +29,15 @@ public class CartService {
         System.out.println("ATTEMPT COUNT: " + ++attempt);
         // Look for product
 
+        ProductResponse productResponse = productHttpInterface.getProductResponse(request.productId());
+        if (productResponse == null || productResponse.stockQuantity() < request.quantity()) {
+            return false;
+        }
 
+        UserResponse user = userHttpInterface.getUserById(userId);
+        if (user == null) {
+            return false;
+        }
 
 
         CartItem existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, request.productId());
@@ -33,12 +48,12 @@ public class CartService {
             cartItemRepository.save(existingCartItem);
         } else {
             // Create new cart item
-           CartItem cartItem = new CartItem();
-           cartItem.setUserId(userId);
-           cartItem.setProductId(request.productId());
-           cartItem.setQuantity(request.quantity());
-           cartItem.setPrice(BigDecimal.valueOf(1000.00));
-           cartItemRepository.save(cartItem);
+            CartItem cartItem = new CartItem();
+            cartItem.setUserId(userId);
+            cartItem.setProductId(request.productId());
+            cartItem.setQuantity(request.quantity());
+            cartItem.setPrice(BigDecimal.valueOf(1000.00));
+            cartItemRepository.save(cartItem);
         }
         return true;
     }
@@ -53,7 +68,7 @@ public class CartService {
     public boolean deleteItemFromCart(String userId, String productId) {
         CartItem cartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
 
-        if (cartItem != null){
+        if (cartItem != null) {
             cartItemRepository.delete(cartItem);
             return true;
         }

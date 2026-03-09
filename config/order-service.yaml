@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: order
+    name: order-service
 
   datasource:
     url: ${DATABASE_URL}
@@ -27,7 +27,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: "busrefresh"
+        include: "busrefresh,shutdown"
+  endpoint:
+    shutdown:
+      enabled: true
 
 eureka:
   client:
