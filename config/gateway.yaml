@@ -6,19 +6,21 @@ spring:
     name: gateway
   cloud:
     gateway:
-      routes:
-        - id: product-service
-          uri: http://localhost:8081
-          predicates:
-            - Path=/api/products/**
-        - id: user-service
-          uri: http://localhost:8082
-          predicates:
-            - Path=/api/users/**
-        - id: order-service
-          uri: http://localhost:8083
-          predicates:
-            - Path=/api/orders/**, /api/cart/**
+      server:
+        webflux:
+          routes:
+            - id: product-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/products/**
+            - id: user-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/users/**, /api/users
+            - id: order-service
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/orders/**, /api/cart/**
   rabbitmq:
     host: ${RABBIT_HOST}
     port: ${RABBIT_PORT}

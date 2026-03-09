@@ -21,18 +21,18 @@ repositories {
 extra["springCloudVersion"] = "2025.1.0"
 
 dependencies {
-//	implementation("org.springframework.boot:spring-boot-micrometer-tracing-brave")
-//	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
-//	implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
-//	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-//	implementation("org.springframework.boot:spring-boot-starter-actuator")
-//	implementation("org.springframework.boot:spring-boot-starter-zipkin")
-//	implementation("io.micrometer:micrometer-tracing-bridge-brave")
-//	implementation("org.springframework.cloud:spring-cloud-starter-config")
+	implementation("org.springframework.boot:spring-boot-micrometer-tracing-brave")
+	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+	implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-zipkin")
+	implementation("io.micrometer:micrometer-tracing-bridge-brave")
+	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
-//	testImplementation("org.springframework.boot:spring-boot-micrometer-tracing-test")
-//	testImplementation("org.springframework.boot:spring-boot-starter-zipkin-test")
-//	testImplementation("io.projectreactor:reactor-test")
+	testImplementation("org.springframework.boot:spring-boot-micrometer-tracing-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-zipkin-test")
+	testImplementation("io.projectreactor:reactor-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
