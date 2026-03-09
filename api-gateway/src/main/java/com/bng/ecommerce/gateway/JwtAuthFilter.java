@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
  * Date: 09/03/26
  ***/
 
-@Component
+//@Component
 public class JwtAuthFilter implements WebFilter {
 
     @Override
