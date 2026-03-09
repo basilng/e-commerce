@@ -15,7 +15,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   rabbitmq:
     host: ${RABBIT_HOST}
