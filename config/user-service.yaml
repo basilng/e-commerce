@@ -25,6 +25,9 @@ management:
   endpoint:
     shutdown:
       enabled: true
+  tracing:
+    sampling:
+      probability: 1.0 # --  for tracing sample size here it is 100%. In prod it should be less 0.25 or 0.10
 
 eureka:
   client:
