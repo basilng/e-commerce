@@ -7,6 +7,7 @@ import com.bng.ecommerce.order.client.dto.UserResponse;
 import com.bng.ecommerce.order.controller.dto.CartItemRequest;
 import com.bng.ecommerce.order.model.CartItem;
 import com.bng.ecommerce.order.repository.CartItemRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class CartService {
     int attempt = 0;
 
 
+    @CircuitBreaker(name = "productService")
     public boolean addToCart(String userId, CartItemRequest request) {
         System.out.println("ATTEMPT COUNT: " + ++attempt);
         // Look for product
