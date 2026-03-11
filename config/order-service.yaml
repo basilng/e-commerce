@@ -73,7 +73,14 @@ resilience4j:
   retry:
     instances:
       retryBreaker:
-        maxAttempts: 5
-        waitDuration: 500ms
+        maxAttempts: 5 #no of attempts to be made
+        waitDuration: 500ms # wait time before next request
   ## Go to resilence4j  -> guides -> retry-> create and configure Retry https://resilience4j.readme.io/docs/getting-started
 
+  ratelimiter:
+    instances:
+      rateBreaker:
+        timeout-duration: 0 #when the limit is reached immediate or wait for sometime for rejection
+        limit-refresh-period: 4s # means 4 seconds the limit will refresh 2 api calls allowed in 4 seconds
+        limit-for-period: 2 #you can have this much call for a given period of time
+  ## Go to resilence4j  -> guides -> ratelimiter-> create and configure Retry https://resilience4j.readme.io/docs/getting-started

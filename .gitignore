@@ -4,6 +4,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 logs/
 
+*.log
+
 ### STS ###
 .apt_generated
 .classpath
