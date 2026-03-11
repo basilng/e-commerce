@@ -7,6 +7,7 @@ import com.bng.ecommerce.order.client.dto.UserResponse;
 import com.bng.ecommerce.order.controller.dto.CartItemRequest;
 import com.bng.ecommerce.order.model.CartItem;
 import com.bng.ecommerce.order.repository.CartItemRepository;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,13 @@ public class CartService {
     //    private final ProductRestClient restClient;
     private final ProductHttpInterface productHttpInterface;
     private final UserHttpInterface userHttpInterface;
-    int attempt = 0;
+    int attempt = 0; // this is for retry
 
 
+    //    @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallBack")
+    @Retry(name = "retryBreaker", fallbackMethod = "addToCartFallBack")
     public boolean addToCart(String userId, CartItemRequest request) {
-        System.out.println("ATTEMPT COUNT: " + ++attempt);
+        System.out.println("ATTEMPT COUNT: " + ++attempt); // checking the count
         // Look for product
 
         ProductResponse productResponse = productHttpInterface.getProductResponse(request.productId());
@@ -58,9 +61,12 @@ public class CartService {
         return true;
     }
 
+    // this is the fallback method written. it should have the same parameter of the method which is using it
+    // additionally exception
     public boolean addToCartFallBack(String userId,
                                      CartItemRequest request,
                                      Exception exception) {
+        System.out.println("FALLBACK CALLED");
         exception.printStackTrace();
         return false;
     }

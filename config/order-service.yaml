@@ -26,9 +26,14 @@ management:
   endpoints:
     web:
       exposure:
-        include: "busrefresh,shutdown,prometheus,metrics,health,info,loggers"
+        include: "busrefresh,shutdown,prometheus,metrics,health,info,loggers,circuitbreakers"
   endpoint:
     shutdown:
+      enabled: true
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
       enabled: true
   tracing:
     sampling:
@@ -48,3 +53,34 @@ logging:
     rollingpolicy:
       max-file-size: 5MB
       max-history: 7
+
+
+# Circuit Breaker
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        registerHealthIndicator: true # register the service with health endpoint using actuator
+        slidingWindowSize: 10 # defines the no of calls CB track
+        minimumNumberOfCalls: 5 # minimum number of calls required to check
+        permittedNumberOfCallsInHalfOpenState: 3 # in half open state 3 are allowed
+        waitDurationInOpenState: 10s # how long CB stays open before moving half open
+        failureRateThreshold: 50 #percentage value of 50% fails it will reject
+        automaticTransitionFromOpenToHalfOpenEnabled: true # 10 seconds it will automatically move to half open
+        slidingWindowType: count_based # using count based and time based is also there
+  ## Go to resilence4j  -> guides -> circuit breaker -> create and configure CB
+  retry:
+    instances:
+      retryBreaker:
+        maxAttempts: 5 #no of attempts to be made
+        waitDuration: 500ms # wait time before next request
+  ## Go to resilence4j  -> guides -> retry-> create and configure Retry https://resilience4j.readme.io/docs/getting-started
+
+  ratelimiter:
+    instances:
+      rateBreaker:
+        timeout-duration: 0 #when the limit is reached immediate or wait for sometime for rejection
+        limit-refresh-period: 4s # means 4 seconds the limit will refresh 2 api calls allowed in 4 seconds
+        limit-for-period: 2 #you can have this much call for a given period of time
+  ## Go to resilence4j  -> guides -> ratelimiter-> create and configure Retry https://resilience4j.readme.io/docs/getting-started
