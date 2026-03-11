@@ -38,7 +38,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "busrefresh,shutdown,prometheus,metrics,health,info,loggers"
+        include: "busrefresh,shutdown,prometheus,metrics,health,info,loggers,circuitbreakers"
   endpoint:
     shutdown:
       enabled: true
