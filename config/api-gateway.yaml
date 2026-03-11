@@ -78,3 +78,5 @@ resilience4j:
         failureRateThreshold: 50 #percentage value of 50% fails it will reject
         automaticTransitionFromOpenToHalfOpenEnabled: true # 10 seconds it will automatically move to half open
         slidingWindowType: count_based # using count based and time based is also there
+
+## https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway-server-webflux/gatewayfilter-factories/requestratelimiter-factory.html
