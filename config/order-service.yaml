@@ -69,5 +69,11 @@ resilience4j:
         failureRateThreshold: 50 #percentage value of 50% fails it will reject
         automaticTransitionFromOpenToHalfOpenEnabled: true # 10 seconds it will automatically move to half open
         slidingWindowType: count_based # using count based and time based is also there
+  ## Go to resilence4j  -> guides -> circuit breaker -> create and configure CB
+  retry:
+    instances:
+      retryBreaker:
+        maxAttempts: 5
+        waitDuration: 500ms
+  ## Go to resilence4j  -> guides -> retry-> create and configure Retry https://resilience4j.readme.io/docs/getting-started
 
-## Go to resilence4j  -> guides -> circuit breaker -> create and configure CB
