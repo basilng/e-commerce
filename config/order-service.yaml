@@ -57,30 +57,17 @@ logging:
 
 # Circuit Breaker
 
-#resilience4j:
-#  circuitbreaker:
-#    instances:
-#      productService:
-#        registerHealthIndicator: true # register the service with health endpoint using actuator
-#        slidingWindowSize: 10 # defines the no of calls CB track
-#        minimumNumberOfCalls: 5 # minimum number of calls required to check
-#        permittedNumberOfCallsInHalfOpenState: 3 # in half open state 3 are allowed
-#        waitDurationInOpenState: 10s # how long CB stays open before moving half open
-#        failureRateThreshold: 50 #percentage value of 50% fails it will reject
-#        automaticTransitionFromOpenToHalfOpenEnabled: true # 10 seconds it will automatically move to half open
-#        slidingWindowType: count_based # using count based and time based is also there
-
-## Go to resilence4j  -> guides -> circuit breaker -> create and configure CB
-
 resilience4j:
   circuitbreaker:
     instances:
       productService:
-        registerHealthIndicator: true
-        slidingWindowSize: 10
-        minimumNumberOfCalls: 5
-        permittedNumberOfCallsInHalfOpenState: 3
-        waitDurationInOpenState: 10s
-        failureRateThreshold: 50
-        automaticTransitionFromOpenToHalfOpenEnabled: true
-        slidingWindowType: count_based
+        registerHealthIndicator: true # register the service with health endpoint using actuator
+        slidingWindowSize: 10 # defines the no of calls CB track
+        minimumNumberOfCalls: 5 # minimum number of calls required to check
+        permittedNumberOfCallsInHalfOpenState: 3 # in half open state 3 are allowed
+        waitDurationInOpenState: 10s # how long CB stays open before moving half open
+        failureRateThreshold: 50 #percentage value of 50% fails it will reject
+        automaticTransitionFromOpenToHalfOpenEnabled: true # 10 seconds it will automatically move to half open
+        slidingWindowType: count_based # using count based and time based is also there
+
+## Go to resilence4j  -> guides -> circuit breaker -> create and configure CB
