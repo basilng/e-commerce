@@ -26,7 +26,7 @@ public class CartService {
     int attempt = 0;
 
 
-    @CircuitBreaker(name = "productService")
+    @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallBack")
     public boolean addToCart(String userId, CartItemRequest request) {
         System.out.println("ATTEMPT COUNT: " + ++attempt);
         // Look for product
@@ -60,9 +60,12 @@ public class CartService {
         return true;
     }
 
+    // this is the fallback method written. it should have the same parameter of the method which is using it
+    // additionally exception
     public boolean addToCartFallBack(String userId,
                                      CartItemRequest request,
                                      Exception exception) {
+        System.out.println("FALLBACK CALLED");
         exception.printStackTrace();
         return false;
     }
