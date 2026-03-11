@@ -22,6 +22,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    // the below method is created for simulating retry in gateway level no point of doing retry if service down
     @GetMapping("/simulate")
     public ResponseEntity<String> simulateFailure(
             @RequestParam(defaultValue = "false") boolean fail) {
